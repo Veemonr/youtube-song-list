@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tambah Lagu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .left img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .navbar .right a {
+            color: #333;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #dd0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="left">
+            <span><%= user.name %></span>
+        </div>
+        <div class="right">
+            <a href="/logout"><u>Logout</u></a>
+            <% if (user.role === "Admin") { %> 
+                <a href="/admin"> <u>Admin</u></a>
+                <% } %>
+            <a href="/lists"><u>User Playlist</u></a>
+            <a href="/lists/add"><u>Add Playlist</u></a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Edit Lagu</h1>
+        <form method="post" action="/admin/edit/<%= editSong.id %>">
+
+            <div style="color: red;">
+                <% if(error) { %> <% error.forEach(el => { %>
+                    <%= el %> <br>
+                <% })} %>
+            </div>
+
+            <label for="title">Judul Lagu</label>
+            <input type="text" id="title" name="title" value="<%= editSong.title %>" ><br>
+
+            <label for="channelName">Channel Name</label>
+            <input type="text" id="singer" name="channelName" value="<%= editSong.channelName %>"" ><br>
+
+            <button type="submit">Tambahkan Lagu</button>
+        </form>
+    </div>
+</body>
+</html>
+

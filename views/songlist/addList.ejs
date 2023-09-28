@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Playlist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #FF0000;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .navbar .left {
+            font-size: 18px;
+        }
+
+        .navbar .right a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #FF0000;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #E0E0E0;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #F8F8F8;
+        }
+
+        a {
+            color: #FF0000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="left">
+            <span><%= user.name %></span>
+        </div>
+        <div class="right">
+            <a href="/logout"><u>Logout</u></a>
+            <% if (user.role === "Admin") { %> 
+                <a href="/admin"> <u>Admin</u></a>
+                <% } %>
+            <a href="/lists"><u>User Playlist</u></a>
+            <a href="/lists/add"><u>Add Playlist</u></a>
+        </div>
+    </div>
+    <div class="container">
+        <form action="/lists/add" method="post">
+            <h1>Add Song To Play List</h1>
+            <div style="justify-content: center;display: flex;">
+                <div style="text-align: center;">
+                    <div style="color: red;">
+                        <% if(error) { %> <% error.forEach(el => { %>
+                            <%= el %> <br>
+                        <% })} %>
+                    </div>
+                    <button style="color:white; background-color: #FF0000; width: 200px; height: 50px; border-color: #E0E0E0;" type="submit"">Add To PlayList</button> <br>
+                    <label for="title">List name</label> <br> 
+                    <input type="text" id="title" name="name" > <br> 
+                    <label for="channelName">Description</label> <br>
+                    <input type="text" id="singer" name="description" ><br>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th>No</th>
+                    <th>Gambar</th>
+                    <th>Judul Lagu</th>
+                    <th>Channel</th>
+                    <th>Action</th>
+                </tr>
+                <% Songs.forEach((el,index )=> { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><img src="<%= el.getImage() %>" alt="Thumbnail"></td>
+                        <td><%= el.title %></td>
+                        <td><%= el.channelName %></td>
+                        <td>
+                            <input type="checkbox" name="SongId" value="<%= el.id %>">
+                        </td>
+                    </tr>
+                <% }) %>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

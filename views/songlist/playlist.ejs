@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Playlist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #FF0000;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .navbar .left {
+            font-size: 18px;
+        }
+
+        .navbar .right a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #FF0000;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #E0E0E0;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #F8F8F8;
+        }
+
+        a {
+            color: #FF0000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="left">
+            <span><%= user.name %></span>
+        </div>
+        <div class="right">
+            <a href="/logout"><u>Logout</u></a>
+            <% if (user.role === "Admin") { %> 
+                <a href="/admin"> <u>Admin</u></a>
+                <% } %>
+            <a href="/lists"><u>User Playlist</u></a>
+            <a href="/lists/add"><u>Add Playlist</u></a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Playlist</h1>
+        <% ListSong.forEach(Lists => { %>
+            <h2> PlayList <%= Lists.name %></h2>
+            <h4> <%= Lists.description %></h4>
+                <table>
+                    <tr>
+                    <th>No</th>
+                    <th>Gambar</th>
+                    <th>Judul Lagu</th>
+                    <th>Channel</th>
+                    <th>Halaman HackTube</th>
+                </tr>
+                <% Lists.Songs.forEach((Song, index) => { %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><img src="<%= Song.getImage() %>" alt="Thumbnail"></td>
+                        <td><%= Song.title %></td>
+                        <td><%= Song.channelName %></td>
+                        <td><a href="/lists/hacktube/<%= Song.id  %>">Lihat di HackTube</a></td>
+                    </tr>
+                <% }) %>
+            </table>
+        <% })%>
+    </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hacktube</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #FF0000; /* Warna header YouTube */
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #BB0000; /* Warna hover YouTube */
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #FF0000; /* Warna header YouTube */
+            color: white;
+            margin: 0;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .video-player {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+
+        video {
+            width: 100%;
+            border: none;
+        }
+
+        .video-description {
+            background-color: #F8F8F8; /* Warna latar belakang deskripsi */
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .footer {
+            background-color: #F8F8F8; /* Warna latar belakang footer */
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .marquee {
+            margin: 0 auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 30%; /* Sesuaikan lebar tabel sesuai kebutuhan */
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #E0E0E0; /* Warna border yang lebih lembut */
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #F8F8F8; /* Warna header tabel */
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="/logout"><u>Logout</u></a>
+    <% if (user.role === "Admin") { %> 
+        <a href="/admin"> <u>Admin</u></a>
+        <% } %>
+    <a href="/lists"><u>User Playlist</u></a>
+    <a href="/lists/add"><u>Add Playlist</u></a>
+</div>
+
+<h1>HACKTUBE</h1>
+
+<div class="content">
+    <div class="video-player">
+    <div id="player">
+        <iframe width="800" height="500"
+        src="https://www.youtube.com/embed/<%= Song.idYoutube %>">
+        </iframe>
+    </div>
+        <div class="video-description">
+            <h2><%= Song.title %></h2>
+        </div>
+    </div>
+
+    <table>
+        <tr>
+            <th>Judul Lagu</th>
+            <th>Artis</th>
+        </tr>
+        <!-- Tambahkan lebih banyak baris jika diperlukan -->
+    </table>
+</div>
+
+<div class="footer">
+  <p class="marquee"><marquee>Pair Project Hyosh dan Jeson</marquee></p>
+</div>
+ <script>
+let player;
+
+player = YouTubePlayer('video-player');
+
+// 'loadVideoById' is queued until the player is ready to receive API calls.
+player.loadVideoById('M7lc1UVf-VE');
+
+// 'playVideo' is queue until the player is ready to received API calls and after 'loadVideoById' has been called.
+player.playVideo();
+
+// 'stopVideo' is queued after 'playVideo'.
+player
+    .stopVideo()
+    .then(() => {
+        // Every function returns a promise that is resolved after the target function has been executed.
+    });
+    </script>
+</body>
+</html>

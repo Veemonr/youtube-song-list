@@ -1,4 +1,4 @@
-const { log } = require("console")
+
 const {User, Profile} = require("../models/index")
 const bcryptjs = require("bcryptjs")
 
@@ -8,7 +8,11 @@ class ControllerLanding {
     }
 
     static registerPage(req, res) {
-        res.render("landing/register")
+        let {error} = req.query 
+        if(error){
+            error = error.split(",")
+        }
+        res.render("landing/register", {error})
     }
 
     static registerHandler(req, res) {
@@ -23,13 +27,22 @@ class ControllerLanding {
             res.redirect("/login")
          })
          .catch(err => {
-            console.log(err);
-            res.send(err)
+            if(err.name === "SequelizeValidationError") {
+                const error = err.errors.map(el => el.message)
+                res.redirect(`/register?error=${error}`)
+            }
+            else {
+                res.send(err)
+            }
          })
     }
 
     static loginPage(req, res) {
-        res.render("landing/login")
+                let {error} = req.query 
+        if(error){
+            error = error.split(",")
+        }
+        res.render("landing/login", {error})
     }
 
     static loginHandler(req, res) {
@@ -41,14 +54,15 @@ class ControllerLanding {
                 const passCheck = bcryptjs.compareSync(password, passDb)
                 if(passCheck) {
                     req.session.user = user.dataValues
-                    console.log(req.session);
-                    return res.redirect("/songs")
+                    return res.redirect("/lists")
                 }
                 else {
-                    return res.redirect("/login")
-                }
+                    const msg = "Password or Username is invalid"
+                    return res.redirect(`/login?error=${msg}`)
+                }   
             }
-            res.redirect("/login")
+            const msg = "Password or Username is invalid"
+            res.redirect(`/login?error=${msg}`)
          })
          .catch(err => {
             res.send(err)
@@ -57,17 +71,29 @@ class ControllerLanding {
 
     static checkAdmin(req, res, next) {
         const user = req.session?.user
-        console.log(user);
         if(user?.role === "Admin") {
             next()
         }
         else {
-            res.send("Khusus admin bro")
+            const loginWarn = "Khusus Admin Bro"
+            res.redirect(`/login?error=${loginWarn}`)
         }
     }
 
     static checkLogin(req, res, next) {
+        const user = req.session?.user
+        if(user?.id) {
+            next()
+        }
+        else {
+            const loginWarn = "Login Dulu Bro"
+            res.redirect(`/login?error=${loginWarn}`)
+        }
+    }
 
+    static logout(req, res) {
+        delete req.session.user
+        res.redirect("/")
     }
 }
 

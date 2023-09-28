@@ -20,8 +20,30 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   List.init({
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Name is required"
+        },
+        notEmpty: {
+          msg: "Name is required"
+        },
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Description is required"
+        },
+        notEmpty: {
+          msg: "Description is required"
+        }
+      }
+    },
     ProfileId: DataTypes.STRING
   }, {
     sequelize,

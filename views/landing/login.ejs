@@ -7,6 +7,12 @@
 </head>
 <body>
     <div>
+        <div style="color: red;">
+            <% if(error) { %> <% error.forEach(el => { %>
+                <%= el %> <br>
+            <% })} %>
+        </div>
+        <button onclick="document.location.href='/'">Back</button>
         <form action="/login" method="post">
             <label>Name</label> <br>
             <input type="text" name="name"> <br>
