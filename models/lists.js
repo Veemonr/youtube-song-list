@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   List.init({
     name: DataTypes.STRING,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    ProfileId: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'List',

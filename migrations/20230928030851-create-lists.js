@@ -22,6 +22,15 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      ProfileId :{
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Profiles",
+          key: "id"
+        },
+        onDelete: "cascade",
+        onUpdate: "cascade"
       }
     });
   },

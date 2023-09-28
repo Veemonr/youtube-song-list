@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasOne(models.Profile)
+      User.belongsTo(models.Profile)
     }
   }
   User.init({
@@ -26,11 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
   User.beforeCreate((user, option) => {
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(user.password, salt, function(err, hash) {
-          user.password = hash
-      });
-  });
+    const salt = bcryptjs.genSaltSync(10)
+    const hash = bcryptjs.hashSync(user.password, salt)
+    user.password = hash
   })
   return User;
 };

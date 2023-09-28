@@ -15,15 +15,6 @@ module.exports = {
       photoProfile: {
         type: Sequelize.STRING
       },
-      ListId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Lists",
-          key: "id"
-        },
-        onDelete: "cascade",
-        onUpdate: "cascade"
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -19,7 +19,8 @@ module.exports = {
           key: "id"
         },
         onDelete: "cascade",
-        onUpdate: "cascade"
+        onUpdate: "cascade",
+        allowNull: true
       },
       SongId: {
         type: Sequelize.INTEGER,

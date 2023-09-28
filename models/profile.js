@@ -11,17 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Profile.belongsTo(models.User)
-      Profile.hasMany(models.List)
+      Profile.hasMany(models.User)
+      Profile.hasOne(models.List)
     }
   }
   Profile.init({
     name: DataTypes.STRING,
     photoProfile: DataTypes.STRING,
-    ListId: DataTypes.INTEGER
-  }, {
+  },{
     sequelize,
     modelName: 'Profile',
   });
+  Profile.beforeCreate((profile, option) => {
+    if(!profile.photoProfile) {
+      profile.photoProfile = "https://www.whitechapelgallery.org/wp-content/uploads/2020/07/blank-head-profile-pic-for-a-man.jpg"
+    }
+  })
   return Profile;
 };
