@@ -3,22 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            text-align: center;
+            margin: 20vh auto;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #dd0000;
+        }
+
+        div.error {
+            color: red;
+            margin-top: 10px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <div>
-        <div style="color: red;">
-            <% if(error) { %> <% error.forEach(el => { %>
-                <%= el %> <br>
-            <% })} %>
+        <div class="error">
+            <% if(error) { %> 
+                <% error.forEach(el => { %>
+                    <%= el %> <br>
+                <% })} %>
         </div>
         <button onclick="document.location.href='/'">Back</button>
         <form action="/login" method="post">
-            <label>Name</label> <br>
-            <input type="text" name="name"> <br>
-            <label>Password</label> <br>
-            <input type="password" name="password"> <br>
-            <input type="submit" name="login">
+            <label for="name">Name</label> <br>
+            <input type="text" id="name" name="name"> <br>
+            <label for="password">Password</label> <br>
+            <input type="password" id="password" name="password"> <br>
+            <input type="submit" value="Login">
         </form>
     </div>
 </body>

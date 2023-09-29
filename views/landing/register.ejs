@@ -4,32 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            text-align: center;
+            margin: 20vh auto;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #ff0000;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select {
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        select {
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #dd0000;
+        }
+
+        div.error {
+            color: red;
+            margin-top: 10px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <div>
         <button onclick="document.location.href='/'">Back</button>
-        <h1>Register </h1>
-        <div style="color: red;">
-            <% if(error) { %> <% error.forEach(el => { %>
-                <%= el %> <br>
-            <% })} %>
+        <h1>Register</h1>
+        <div class="error">
+            <% if(error) { %> 
+                <% error.forEach(el => { %>
+                    <%= el %> <br>
+                <% })} %>
         </div>
         <form action="/register" method="post">
-            <label>name</label> <br>
-            <input type="text" name="name"> <br>
-            <label>password</label> <br>
-            <input type="password" name="password"> <br>
-            <label>photo profile link ( can be empty )</label> <br>
-            <input type="text" name="photoProfile"> <br>
-            <label>email</label> <br>
-            <input type="email" name="email"> <br>
-            <label>role</label> <br>
-            <select name="role">
+            <label for="name">Name</label> <br>
+            <input type="text" id="name" name="name"> <br>
+            <label for="password">Password</label> <br>
+            <input type="password" id="password" name="password"> <br>
+            <label for="photoProfile">Photo Profile Link (optional)</label> <br>
+            <input type="text" id="photoProfile" name="photoProfile"> <br>
+            <label for="email">Email</label> <br>
+            <input type="email" id="email" name="email"> <br>
+            <label for="role">Role</label> <br>
+            <select id="role" name="role">
                 <option selected disabled>PICK ROLE</option>
                 <option value="User">User</option>
                 <option value="Admin">Admin</option>
             </select> <br>
-            <input type="submit" name="Register">
+            <input type="submit" value="Register">
         </form>
     </div>
 </body>

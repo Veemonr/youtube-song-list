@@ -1,16 +1,140 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackTube Player List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            text-align: center;
+            margin-top: 20vh;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #ff0000;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #dd0000;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Welcome To HackTube Player List</h1>
+        <h3>You can add your songs to the list and play them as you like.</h3><br>
+        <button onclick="document.location.href='/register'">REGISTER</button>
+        <button onclick="document.location.href='/login'">LOGIN</button>
+    </div>
+</body>
+</html> -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>YouTube Player List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            text-align: center;
+            margin-top: 20vh;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #ff0000;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #dd0000;
+        }
+    </style>
 </head>
 <body>
     <div>
-        <h1> Welcome To Youtube Player List </h1>
-        <h3> You can add your song to list and play it as you like it </h3> <br>
-        <button onclick="document.location.href='/register'">REGISTER</button>
-        <button onclick="document.location.href='/login'">LOGIN</button>
+        <h1>Welcome To HackTube Player List</h1>
+        <h3>You can add your songs to the list and play them as you like.</h3><br>
+        <!-- <button onclick="document.location.href='/register'">REGISTER</button>
+        <button onclick="document.location.href='/login'">LOGIN</button> -->
     </div>
+
+    <!-- Register Form -->
+    <div style="margin-top: 50px;">
+        <!-- <button onclick="document.location.href='/'">Back</button>
+        <h1>Register</h1> -->
+        <div class="error">
+            <!-- Error messages will be inserted here -->
+        </div>
+        <form action="/register" method="post">
+            <label for="name">Name</label> <br>
+            <input type="text" id="name" name="name"> <br><br>
+            <label for="password">Password</label> <br>
+            <input type="password" id="password" name="password"> <br><br>
+            <label for="photoProfile">Photo Profile Link (optional)</label> <br>
+            <input type="text" id="photoProfile" name="photoProfile"> <br><br>
+            <label for="email">Email</label> <br>
+            <input type="email" id="email" name="email"> <br><br>
+            <label for="role">Role</label> <br>
+            <select id="role" name="role">
+                <option selected disabled>PICK ROLE</option><br>
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+            </select> <br><br>
+            <input type="submit" value="Register">
+        </form>
+
+        <!-- Login Link -->
+        <p>Sudah memiliki akun? Masuk di sini! <a href="/login">Login</a></p>
+    </div>
+
 </body>
 </html>
